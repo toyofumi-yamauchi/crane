@@ -27,13 +27,13 @@
   [A]
     family = SCALAR
     order = FIRST
-    initial_condition = 1
+    initial_condition = 0.5
   []
 
   [B]
     family = SCALAR
     order = FIRST
-    initial_condition = 0
+    initial_condition = 0.5
   []
 
   [C]
@@ -66,7 +66,7 @@
   [lieberman_reactions]
     species = 'A B C'
     reactions = 'A -> B       : 5
-                 B -> C       : 1'
+                 A + B -> C       : 1'
   []
 []
 

@@ -10,10 +10,7 @@
 # 2. Type "mamba activate moose" to activate moose
 #    (base) will be changed to (moose)
 # 3. Type "../../crane-opt -i air_plasma.i"
-#    air-plasma.csv should be created in the folder.
-# 
-
-
+#    air_plasma_output.csv should be created in the folder.
 
 [Mesh]
   # 'Dummy' mesh - a mesh is always needed to run MOOSE, but
@@ -30,48 +27,71 @@
 [Variables]
   # ODE variables
   # Global variables are called "SCALAR" in MOOSE.
-  [./e]
+  [e]
+    family = SCALAR
+    order = FIRST
+    initial_condition = 0.5
+  []
+
+  [N2]
+    family = SCALAR
+    order = FIRST
+    initial_condition = 0.25
+  []
+
+  [O2]
+    family = SCALAR
+    order = FIRST
+    initial_condition = 0.25
+  []
+
+  [N]
     family = SCALAR
     order = FIRST
     initial_condition = 0
   []
 
-  [./N2+]
+  [O]
     family = SCALAR
     order = FIRST
     initial_condition = 0
   []
 
-  [./N2]
-    family = SCALAR
-    order = FIRST
-    initial_condition = 0.78
-  []
-
-  [./O2+]
+  [N2+]
     family = SCALAR
     order = FIRST
     initial_condition = 0
   []
 
-  [./O2]
-    family = SCALAR
-    order = FIRST
-    initial_condition = 0.22
-  []
-
-  [./O+]
+  [O2+]
     family = SCALAR
     order = FIRST
     initial_condition = 0
   []
 
-  [./O]
+  [N+]
     family = SCALAR
     order = FIRST
     initial_condition = 0
   []
 
+  [O+]
+    family = SCALAR
+    order = FIRST
+    initial_condition = 0
+  []
+
+  [O2-]
+    family = SCALAR
+    order = FIRST
+    initial_condition = 0
+  []
+
+  [O-]
+    family = SCALAR
+    order = FIRST
+    initial_condition = 0
+  []
 []
 
 [ScalarKernels]
@@ -83,131 +103,82 @@
     type = ODETimeDerivative
     variable = e
   []
-  [dN2+_dt]
-    type = ODETimeDerivative
-    variable = N2+
-  []
   [dN2_dt]
     type = ODETimeDerivative
     variable = N2
-  []
-  [dO2+_dt]
-    type = ODETimeDerivative
-    variable = O2+
   []
   [dO2_dt]
     type = ODETimeDerivative
     variable = O2
   []
-  [dO+_dt]
+  [dN_dt]
     type = ODETimeDerivative
-    variable = O+
+    variable = N
   []
   [dO_dt]
     type = ODETimeDerivative
     variable = O
   []
+  [dN2+_dt]
+    type = ODETimeDerivative
+    variable = N2+
+  []
+  [dO2+_dt]
+    type = ODETimeDerivative
+    variable = O2+
+  []
+  [dN+_dt]
+    type = ODETimeDerivative
+    variable = N+
+  []
+  [dO+_dt]
+    type = ODETimeDerivative
+    variable = O+
+  []
+  [dO2-_dt]
+    type = ODETimeDerivative
+    variable = O2-
+  []
+  [dO-_dt]
+    type = ODETimeDerivative
+    variable = O-
+  []
 []
 
 [GlobalReactions]
-  [lieberman_reactions]
-    species = 'e N2+ N2 O2+ O2 O+ O'
-    reactions = ' -> B       : 5
-                 B -> C       : 1'
+  [air_reactions]
+    species = 'e N2 O2 N2+ O2+ N+ O+ O2- O-'
+    #file_location = 'data'
+
+    equation_constants = 'Te'
+    equation_values = '11605'
+
+    reactions = 'e + N+ + N2 -> N + N2 : 3.12e-23/(T_e^(1.5))
+                 e + N+ + N -> N + N   : 3.12e-23/(T_e^(1.5))
+                 e + N+ + O2 -> N + O2 : 3.12e-23/(T_e^(1.5))
+                 e + N+ + O -> N + O   : 3.12e-23/(T_e^(1.5))'
   []
 []
-
-[AuxVariables]
-  [./reduced_field]
-    order = FIRST
-    family = SCALAR
-    initial_condition = 7.7667949e-20
-  [../]
-
-  [./mobility]
-    order = FIRST
-    family = SCALAR
-  [../]
-
-  [./Te]
-    order = FIRST
-    family = SCALAR
-  [../]
-
-  [./current]
-    order = FIRST
-    family = SCALAR
-  [../]
-[]
-
-[AuxScalarKernels]
-  [reduced_field_calculate]
-    type = ParsedAuxScalar
-    variable = reduced_field
-    constant_names = 'V d qe R'
-    constant_expressions = '1000 0.004 1.602e-19 1e5'
-    args = 'reduced_field Ar current'
-    function = 'V/(d+R*current/(reduced_field*Ar*1e6))/(Ar*1e6)'
-    execute_on = 'TIMESTEP_END'
-  []
-
-  [e_drift]
-    type = ParsedAuxScalar
-    variable = current
-    constant_names = 'r pi'
-    constant_expressions = '0.004 3.1415926'
-    args = 'reduced_field mobility Ar e'
-    function = '(reduced_field * mobility * Ar*1e6) * 1.6e-19 * pi*(r^2.0) * (e*1e6)'
-    execute_on = 'TIMESTEP_BEGIN'
-  []
-
-  [mobility_calculation]
-    type = ScalarLinearInterpolation
-    variable = mobility
-    sampler = reduced_field
-    property_file = 'data/electron_mobility.txt'
-    execute_on = 'INITIAL TIMESTEP_BEGIN'
-  []
-
-  [temperature_calculation]
-    type = ScalarLinearInterpolation
-    variable = Te
-    sampler = reduced_field
-    property_file = 'data/electron_temperature.txt'
-    execute_on = 'INITIAL TIMESTEP_BEGIN'
-  []
-[]
-
-[Debug]
-  show_var_residual_norms = true
-[]
-
-#[UserObjects]
-#  active = 'value_provider'
-#
-  #[./value_provider]
-  #  type = ValueProvider
-  #  property_file = 'data/electron_temperature.txt'
-  #[../]
-#[]
 
 [Executioner]
   type = Transient
-  end_time = 1e-3
+  start_time = 0
+  end_time = 3
+  dt = 0.1
+
   solve_type = linear
-  dtmin = 1e-16
-  dtmax = 1e-6
-  line_search = none
-  steady_state_detection = true
-  [./TimeStepper]
-    type = IterationAdaptiveDT
-    cutback_factor = 0.9
-    dt = 1e-10
-    growth_factor = 1.01
-  [../]
-  #[TimeIntegrator]
-  #  type = LStableDirk2
-  #[]
+
+  # You can select different time integrators to see how they affect
+  # the accuracy of the solution
+  [TimeIntegrator]
+    # This one is the default
+    type = ImplicitEuler
+
+    #type = LStableDirk2
+    #type = BDF2
+    #type = CrankNicolson
+    #type = ImplicitMidpoint
+  []
 []
 
 [Preconditioning]
@@ -218,9 +189,10 @@
 []
 
 [Outputs]
-  [out_ka_1_kb_5]
+  [output]
     type = CSV
   []
+
 
   # This next one is optional, but highly recommended.
   # Without this, scalar variables are printed on the terminal as the 

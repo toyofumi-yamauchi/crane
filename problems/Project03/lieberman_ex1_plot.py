@@ -4,7 +4,8 @@ import matplotlib.pyplot as plt
 ka = 1
 kb = 5
 
-filename = 'lieberman_ex1_out_ka_'+str(ka)+'_kb_'+str(kb)+'.csv'
+#filename = 'lieberman_ex1_out_ka_'+str(ka)+'_kb_'+str(kb)+'.csv'
+filename = 'lieberman_ex2_out_ka_1_kb_5.csv'
 data = np.genfromtxt(filename, dtype=float, delimiter=',', skip_header=1)
 
 t = data[:,0]
