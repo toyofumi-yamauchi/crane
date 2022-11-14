@@ -20,23 +20,28 @@ e   = data[:,11]
 t_exact = np.linspace(0, 3, 100)
 
 # Crane solutions
-lINEWIDTH = 2.0
-plt.plot(t, e,   linewidth=lINEWIDTH, label='$e$')
-plt.plot(t, N,   linewidth=lINEWIDTH, label='$N$')
-plt.plot(t, Np,  linewidth=lINEWIDTH, label='$N^+$')
-plt.plot(t, N2,  linewidth=lINEWIDTH, label='$N_2$')
-plt.plot(t, N2p, linewidth=lINEWIDTH, label='$N_2^+$')
-plt.plot(t, O,   linewidth=lINEWIDTH, label='$O$')
-plt.plot(t, Op,  linewidth=lINEWIDTH, label='$O^+$')
-plt.plot(t, Om,  linewidth=lINEWIDTH, label='$O^-$')
-plt.plot(t, O2,  linewidth=lINEWIDTH, label='$O_2$')
-plt.plot(t, O2p, linewidth=lINEWIDTH, label='$O_2^+$')
-plt.plot(t, O2m, linewidth=lINEWIDTH, label='$O_2^-$')
+lINEWIDTH1 = 1.0
+lINEWIDTH2 = 2.0
+plt.plot(t, e,   linestyle='-.', linewidth=lINEWIDTH2, color='royalblue', label='$e$')
+plt.plot(t, N2,  linestyle='-',  linewidth=lINEWIDTH2, color='green',     label='$N_2$')
+plt.plot(t, N,   linestyle='-',  linewidth=lINEWIDTH2, color='lime',      label='$N$')
+plt.plot(t, O2,  linestyle='-',  linewidth=lINEWIDTH2, color='orangered', label='$O_2$')
+plt.plot(t, O,   linestyle='-',  linewidth=lINEWIDTH2, color='orange',    label='$O$')
+plt.plot(t, N2p, linestyle='--', linewidth=lINEWIDTH2, color='green',     label='$N_2^+$')
+plt.plot(t, Np,  linestyle='--', linewidth=lINEWIDTH2, color='lime',      label='$N^+$')
+plt.plot(t, O2p, linestyle='--', linewidth=lINEWIDTH2, color='orangered', label='$O_2^+$')
+plt.plot(t, Op,  linestyle='--', linewidth=lINEWIDTH2, color='orange',    label='$O^+$')
+plt.plot(t, O2m, linestyle='-.',  linewidth=lINEWIDTH2, color='purple',   label='$O_2^-$')
+plt.plot(t, Om,  linestyle='-.',  linewidth=lINEWIDTH2, color='deeppink', label='$O^-$')
 
-plt.legend(loc='best', ncol=3)
+plt.yscale('log')
+
+plt.legend(loc='best', ncol=1, framealpha=1.0)
 plt.xticks(fontsize=15)
 plt.yticks(fontsize=15)
 plt.xlabel('t', fontsize=18)
 plt.ylabel('n', fontsize=18)
-#plt.savefig('ex1_plot.png')
+plt.grid()
+plt.tight_layout()
+#plt.savefig('air_plasma_plot.png',dpi=300)
 plt.show()

@@ -140,7 +140,7 @@
     constant_expressions = '0.004 3.1415926'
     args = 'reduced_field mobility Ar e'
     function = '(reduced_field * mobility * Ar*1e6) * 1.6e-19 * pi*(r^2.0) * (e*1e6)'
-    execute_on = 'TIMESTEP_BEG'
+    execute_on = 'TIMESTEP_BEGIN'
   []
 
   [mobility_calculation]
