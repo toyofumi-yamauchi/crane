@@ -1,0 +1,204 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2706
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fmodern\fcharset0 Courier;}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue0;}
+{\*\expandedcolortbl;;\cssrgb\c0\c0\c0;}
+\margl1440\margr1440\vieww18700\viewh19680\viewkind0
+\deftab720
+\pard\pardeftab720\partightenfactor0
+
+\f0\fs26 \cf0 \expnd0\expndtw0\kerning0
+LXCat, www.lxcat.net\
+Generated on 17 Nov 2022. All rights reserved.\
+\
+RECOMMENDED REFERENCE FORMAT\
+- IST-Lisbon database, www.lxcat.net, retrieved on November 17, 2022.\
+- TRINITI database, www.lxcat.net, retrieved on November 17, 2022.\
+Be aware that some databases and solvers can additionally have instructions how to reference corresponding data.\
+Please check below in the headers of databases.\
+\
+CROSS SECTION DATA FORMAT\
+In downloaded files, each collision process is defined by a block consisting of\
+1st line\
+Keyword in capitals indicating the type of the collision. Possible collision types are elastic, effective, excitation,\
+ionization, or attachment (capital letters required, key words are case sensitive), where "elastic" is used to denote\
+the elastic momentum transfer cross section and where "effective" denotes the total momentum transfer cross section (sum\
+of elastic momentum transfer and total inelastic cross sections).  The latter is useful for solving the Boltzmann\
+equation in the 2-term approximation.\
+2nd line\
+Name of the target particle species. This name is a character string, freely chosen by the user, e.g. "Ar". Optionally\
+for excitation processes, the name of the corresponding excited state can be specified on the same line, separated from\
+the first name either by arrow "->" (dash + greater than) or by double-head arrow "<->" (less than + dash +\
+greater than), e.g. "Ar -> Ar*" and "Ar <-> Ar*", respectively. In the later case BOLSIG+ will automatically\
+define the inverse superelastic process, constructing the superelastic cross-section by detailed balancing, and\
+considering the indicated excited state as the target. In this case, the ratio of statistical weights must be input in\
+the 3rd line (see below).\
+3rd line\
+For elastic and effective collisions, the ratio of the electron mass to the target particle mass. For excitation or\
+ionization collisions, the electron energy loss (nominally the threshold energy) in eV. For attachment, the 3rd line is\
+missing. In case of an excitation process where an excited state has been indicated on the 2nd line using double-head\
+arrow "<->", the 3rd line must specify also ratio of the statistical weights of the final state to the initial state\
+as the second parameter in 3rd line this is needed by BOLSIG+ to calculate the de-excitation cross-section. The\
+statistical weight ratio, if given, will also be used by the automatic superelastics option in BOLSIG+. If this ratio is\
+not provided then BOLSIG+ will assume it unity.\
+from 4th line (optionally)\
+User comments and reference information, maximum 100 lines. The only constraint on format is that these comment lines\
+must not start with a number.\
+Finally\
+Table of the cross section as a function of energy. The table starts and ends by a line of dashes "------" (at least 5),\
+and has otherwise two numbers per line: the energy in eV and the cross section in m2.\
+\
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\
+DATABASE:         IST-Lisbon database\
+PERMLINK:         www.lxcat.net/IST-Lisbon\
+DESCRIPTION:      IST-Lisbon database contains up-to-date electron-neutral scattering cross sections (together with the\
+                  measured swarm parameters used to validate these data), resulting from the research effort of the\
+                  Group N-Plasmas Reactive: Modelling and Engineering (N-PRiME) with IPFN/IST (Instituto de Plasmas e\
+                  Fusao Nuclear / Instituto Superior Tecnico), Lisbon, Portugal.  The data, compiled from the\
+                  literature, correspond to contributions from different authors (see detailed references in the\
+                  database). For each gas the database presents a COMPLETE SET of cross sections, validated against\
+                  measured swarm parameters by solving the two-term homogeneous electron Boltzmann equation. In most\
+                  cases, predictions are in agreement with measurements within 1-20%, for reduced electric fields E/N ~\
+                  1e-4 - 500 Td. To improve predictions at low E/N, some sets need to be completed with rotational cross\
+                  sections, also available in the database.\
+CONTACT:          LL Alves and V Guerra\
+                  e-mail: llalves@@tecnico.ulisboa.pt\
+HOW TO REFERENCE: L.L. Alves, ''The IST-Lisbon database on LXCat'' J. Phys. Conf. Series 2014, 565, 1\
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\
+\
+************************************************************************************************************************\
+\
+\
+********************************************************** O2 **********************************************************\
+\
+IONIZATION\
+O2 -> O + O+ (O2(X) -> O(3P) + O+)\
+ 1.681000e+1\
+SPECIES: e / O2\
+PROCESS: E + O2 -> E + E + O + O+ (O2(X) -> O(3P) + O+), Ionization\
+PARAM.:  E = 16.81 eV\
+COMMENT: [e + O2(X) -> e + e + O(3P) + O(+,gnd), Ionization] Gousset G et al 1991 J. Phys. D 24\
+COMMENT: 290. - THIS IS NOT PART OF THE COMPLETE SET.\
+UPDATED: 2022-07-22 10:46:09\
+COLUMNS: Energy (eV) | Cross section (m2)\
+-----------------------------\
+ 1.681000e+1	0.000000e+0\
+ 1.800000e+1	1.900000e-23\
+ 1.900000e+1	2.700000e-23\
+ 2.000000e+1	4.800000e-23\
+ 2.250000e+1	1.800000e-22\
+ 2.500000e+1	4.200000e-22\
+ 2.750000e+1	7.800000e-22\
+ 3.000000e+1	1.150000e-21\
+ 3.250000e+1	1.620000e-21\
+ 3.500000e+1	2.280000e-21\
+ 4.000000e+1	3.220000e-21\
+ 4.500000e+1	4.080000e-21\
+ 5.000000e+1	4.800000e-21\
+ 5.500000e+1	5.580000e-21\
+ 6.000000e+1	6.310000e-21\
+ 6.500000e+1	7.070000e-21\
+ 7.000000e+1	7.620000e-21\
+ 7.500000e+1	8.180000e-21\
+ 8.000000e+1	8.660000e-21\
+ 8.500000e+1	8.900000e-21\
+ 9.000000e+1	9.190000e-21\
+ 9.500000e+1	9.470000e-21\
+ 1.000000e+2	9.720000e-21\
+ 1.050000e+2	9.910000e-21\
+ 1.100000e+2	1.007000e-20\
+ 1.150000e+2	1.020000e-20\
+ 1.200000e+2	1.028000e-20\
+ 1.250000e+2	1.034000e-20\
+ 1.300000e+2	1.037000e-20\
+ 1.350000e+2	1.040000e-20\
+ 1.400000e+2	1.043000e-20\
+ 1.450000e+2	1.044000e-20\
+ 1.500000e+2	1.042000e-20\
+ 1.550000e+2	1.039000e-20\
+ 1.600000e+2	1.036000e-20\
+ 1.650000e+2	1.032000e-20\
+ 1.700000e+2	1.028000e-20\
+ 1.750000e+2	1.021000e-20\
+ 1.800000e+2	1.018000e-20\
+ 1.850000e+2	1.010000e-20\
+ 1.900000e+2	1.004000e-20\
+ 1.950000e+2	9.970000e-21\
+ 2.000000e+2	9.900000e-21\
+ 2.100000e+2	9.760000e-21\
+ 2.200000e+2	9.600000e-21\
+ 2.300000e+2	9.420000e-21\
+ 2.400000e+2	9.250000e-21\
+ 2.500000e+2	9.070000e-21\
+ 2.600000e+2	8.900000e-21\
+ 2.700000e+2	8.730000e-21\
+ 2.800000e+2	8.560000e-21\
+ 2.900000e+2	8.400000e-21\
+ 3.000000e+2	8.200000e-21\
+ 3.500000e+2	7.420000e-21\
+ 4.000000e+2	6.720000e-21\
+ 4.500000e+2	6.090000e-21\
+ 5.000000e+2	5.620000e-21\
+ 5.500000e+2	5.210000e-21\
+ 6.000000e+2	4.870000e-21\
+ 6.500000e+2	4.560000e-21\
+ 7.000000e+2	4.300000e-21\
+ 7.500000e+2	4.070000e-21\
+ 8.000000e+2	3.850000e-21\
+ 8.500000e+2	3.650000e-21\
+ 9.000000e+2	3.490000e-21\
+ 9.500000e+2	3.360000e-21\
+ 1.000000e+3	3.300000e-21\
+-----------------------------\
+\
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\
+DATABASE:         TRINITI database\
+PERMLINK:         www.lxcat.net/TRINITI\
+DESCRIPTION:      These cross sections retrieved from the EEDF software package for calculations of electron energy\
+                  distribution function developed by Prof. Napartovich A. P. and  Drs. Dyatko N. A., Kochetov I. V.,\
+                  Sukharev A. G. from The State Science Center Troitsk Institute for Innovation and Fusion Research,\
+                  Russia\
+CONTACT:          Contact person is Dr. Igor Kochetov\
+                  kochet@@triniti.ru\
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\
+\
+************************************************************************************************************************\
+\
+COMMENT: A A Ionin, I V Kochetov, A P Napartovich and N N Yuryshev, Physics and engineering of singlet delta oxygen production in\
+         low-temperature plasma, J. Phys. D: Appl. Phys. 40 (2007) R25-R61.\
+\
+********************************************************** O2 **********************************************************\
+\
+IONIZATION\
+O2 -> O + O^+\
+ 1.950000e+1\
+SPECIES: e / O2\
+PROCESS: E + O2 -> E + E + O + O+, Ionization\
+PARAM.:  E = 19.5 eV, complete set\
+COMMENT: Eliasson B, Kogelschatz U 1986 Basic data for modelling of electrical discharge in gases:\
+COMMENT: Oxygen. Report KLR-86-11C. Report Brown Boveri Forschungszentrum CH-5405 Baden.\
+UPDATED: 2010-11-03 13:50:31\
+COLUMNS: Energy (eV) | Cross section (m2)\
+-----------------------------\
+ 1.950000e+1	0.000000e+0\
+ 2.000000e+1	1.310000e-23\
+ 2.100000e+1	4.310000e-23\
+ 2.200000e+1	8.210000e-23\
+ 2.300000e+1	1.520000e-22\
+ 2.400000e+1	2.390000e-22\
+ 2.500000e+1	3.480000e-22\
+ 3.000000e+1	1.010000e-21\
+ 4.000000e+1	2.690000e-21\
+ 5.000000e+1	4.370000e-21\
+ 6.000000e+1	5.710000e-21\
+ 7.000000e+1	6.890000e-21\
+ 8.000000e+1	8.000000e-21\
+ 9.000000e+1	8.570000e-21\
+ 1.000000e+2	9.160000e-21\
+ 1.500000e+2	1.030000e-20\
+ 2.000000e+2	9.750000e-21\
+ 3.000000e+2	8.150000e-21\
+ 4.000000e+2	6.640000e-21\
+ 5.000000e+2	5.360000e-21\
+ 1.000000e+3	3.360000e-21\
+-----------------------------\
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx}

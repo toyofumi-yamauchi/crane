@@ -83,11 +83,13 @@
     sampling_variable = 'reduced_field'
 
 
-    reactions = 'e + Ar -> e + e + Ar+          : EEDF (Ar_ionization)
+    reactions = '
+	         Ar2+ + e -> Ar* + Ar           : {8.5e-7*((Te/1.5)*11600/300.0)^(-0.67)}
+                 e + Ar -> e + e + Ar+          : EEDF (Ar_ionization)
                  e + Ar -> Ar* + e              : EEDF (Ar_excitation)
                  e + Ar* -> Ar + e              : EEDF (Ar*_deexcitation)
-                 e + Ar* -> Ar+ + e + e         : EEDF (Ar*_ionization)
-                 Ar2+ + e -> Ar* + Ar           : {8.5e-7*((Te/1.5)*11600/300.0)^(-0.67)}
+		 #1
+		 #e + Ar* -> Ar+ + e + e         : EEDF (Ar*_ionization)
                  Ar2+ + Ar -> Ar+ + Ar + Ar     : {(6.06e-6/Tgas)*exp(-15130.0/Tgas)}
                  Ar* + Ar* -> Ar2+ + e          : 6.0e-10
                  Ar+ + e + e -> Ar + e          : {8.75e-27*((Te/1.5)^(-4.5))}
@@ -156,7 +158,7 @@
     variable = Te
     sampler = reduced_field
     property_file = 'data/electron_temperature.txt'
-    execute_on = 'INITIAL TIMESTEP_BEGIN'
+    execute_on = 'INITIAL TIMESTEP_BEGIN' # when this calculation should occur
   []
 []
 
