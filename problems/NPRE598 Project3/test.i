@@ -39,13 +39,13 @@
   [N2]
     family = SCALAR
     order = FIRST
-    initial_condition = 1.00e24
+    initial_condition = 0.0
   []
 
   [O2]
     family = SCALAR
     order = FIRST
-    initial_condition = 0.0
+    initial_condition = 1.00e24
   []
 
   [N]
@@ -244,26 +244,22 @@
     file_location = 'data'
 
     equation_constants = 'T_e T_g'
-    equation_values = '11605 300'
+    equation_values = '116050 300'
     equation_variables = 'a'
-    sampling_variable = 'reduced_field'
-    #rate_provider_var = 'reduced_field'
+    sampling_variable = 'T_e_eV'
     
     reactions = '
                  
 		 # 16
-                 #e + O2 -> O + O+ + e + e     : EEDF (Op_ionization)
+                 #e + O2 -> O + O+ + e + e     : EEDF (Op_ionization_Te)
      		 
 		 # 7 (R4)
-                 #e + N2 -> N2+ + e + e        : EEDF (N2_ionization)
-		 e + N2 -> e + e + N2+        : {1.00e-10*(1.5*T_e/11605)^(1.90)*exp(-14.6/(1.5*T_e/11605))}
+                 e + N2 -> e + e + N2+        : {1.00e-10*(1.5*T_e/11605)^(1.90)*exp(-14.6/(1.5*T_e/11605))}
 		 
 		 # 18 (R60)
-     		 #e + O2 -> O- + O             : EEDF (Om_ionization)
-		 #e + O2 -> O- + O             : 2.63e-10*(1.5*T_e/11605)^(-0.495)*exp(-5.65/(1.5*T_e/11605))
+     		 e + O2 -> O- + O             : {2.63e-10*(1.5*T_e/11605)^(-0.495)*exp(-5.65/(1.5*T_e/11605))}
 		 # 19 (R10)
-     		 #e + O2 -> O2+ + e + e        : EEDF (O2p_ionization)
-		 #e + O2 -> O2+ + e + e        : 9.54e-6*(1.5*T_e/11605)^(-1.05)*exp(-55.6/(1.5*T_e/11605))
+     		 e + O2 -> O2+ + e + e        : {9.54e-6*(1.5*T_e/11605)^(-1.05)*exp(-55.6/(1.5*T_e/11605))}
 
                  # 1
                  #e + N+ + N2 -> N + N2        : {3.12e-23/(T_e^1.5)}
@@ -286,10 +282,10 @@
 []
 
 [AuxVariables]
-  [./reduced_field]
+  [./T_e_eV]
     order = FIRST
     family = SCALAR
-    initial_condition = 1.0e-19
+    initial_condition = 1.0
   [../]
   [./a]
     order = FIRST
@@ -298,20 +294,20 @@
 []
 
 [AuxScalarKernels]
-  [reduced_field_calculate]
+  [T_e_eV_calculate]
     type = ParsedAuxScalar
-    variable = reduced_field
-    constant_names = 'V d qe R current'
-    constant_expressions = '1000 0.004 1.602e-19 1e5 100'
-    args = 'reduced_field N2'
-    function = 'V/(d+R*current/(reduced_field*N2*1e6))/(N2*1e6)'
+    variable = T_e_eV
+    constant_names = 'x'
+    constant_expressions = '1'
+    args = 'a'
+    function = 'x'
     execute_on = 'TIMESTEP_END'
   []
 []
 
 [Executioner]
   type = Transient
-  end_time = 1e-2
+  end_time = 5e-3
   solve_type = linear
   dtmin = 1e-11
   dtmax = 1e-2

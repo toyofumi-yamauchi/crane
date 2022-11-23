@@ -31,7 +31,7 @@ Om   = data[:,16]
 O2   = data[:,17]
 O2p  = data[:,18]
 O2m  = data[:,19]
-e    = data[:,21]
+e    = data[:,23]
 
 print('{:.2e}'.format(t[-1]))
 print('{:.0f}'.format(len(t)))
@@ -43,16 +43,16 @@ plt.figure(figsize=(5.5,4.0))
 #plt.figure(figsize=(2.75,2.0))
 time_factor = 1
 density_factor = 1e6
-plt.plot(t*time_factor, N2*density_factor,  linestyle='-',  linewidth=lINEWIDTH2, color='green',     label='$N_2$')
-plt.plot(t*time_factor, N*density_factor,   linestyle='-',  linewidth=lINEWIDTH2, color='lime',      label='$N$')
-#plt.plot(t*time_factor, O2*density_factor,  linestyle='-',  linewidth=lINEWIDTH2, color='orangered', label='$O_2$')
-#plt.plot(t*time_factor, O*density_factor,   linestyle='-',  linewidth=lINEWIDTH2, color='orange',    label='$O$')
-plt.plot(t*time_factor, N2p*density_factor, linestyle='--', linewidth=lINEWIDTH2, color='green',     label='$N_2^+$')
-plt.plot(t*time_factor, Np*density_factor,  linestyle='--', linewidth=lINEWIDTH2, color='lime',      label='$N^+$')
-#plt.plot(t*time_factor, O2p*density_factor, linestyle='--', linewidth=lINEWIDTH2, color='orangered', label='$O_2^+$')
-#plt.plot(t*time_factor, Op*density_factor,  linestyle='--', linewidth=lINEWIDTH2, color='orange',    label='$O^+$')
-#plt.plot(t*time_factor, O2m*density_factor, linestyle='-.', linewidth=lINEWIDTH2, color='purple',   label='$O_2^-$')
-#plt.plot(t*time_factor, Om*density_factor,  linestyle='-.', linewidth=lINEWIDTH2, color='deeppink', label='$O^-$')
+#plt.plot(t*time_factor, N2*density_factor,  linestyle='-',  linewidth=lINEWIDTH2, color='green',     label='$N_2$')
+#plt.plot(t*time_factor, N*density_factor,   linestyle='-',  linewidth=lINEWIDTH2, color='lime',      label='$N$')
+plt.plot(t*time_factor, O2*density_factor,  linestyle='-',  linewidth=lINEWIDTH2, color='orangered', label='$O_2$')
+plt.plot(t*time_factor, O*density_factor,   linestyle='-',  linewidth=lINEWIDTH2, color='orange',    label='$O$')
+#plt.plot(t*time_factor, N2p*density_factor, linestyle='--', linewidth=lINEWIDTH2, color='green',     label='$N_2^+$')
+#plt.plot(t*time_factor, Np*density_factor,  linestyle='--', linewidth=lINEWIDTH2, color='lime',      label='$N^+$')
+plt.plot(t*time_factor, O2p*density_factor, linestyle='--', linewidth=lINEWIDTH2, color='orangered', label='$O_2^+$')
+plt.plot(t*time_factor, Op*density_factor,  linestyle='--', linewidth=lINEWIDTH2, color='orange',    label='$O^+$')
+plt.plot(t*time_factor, O2m*density_factor, linestyle='-.', linewidth=lINEWIDTH2, color='purple',   label='$O_2^-$')
+plt.plot(t*time_factor, Om*density_factor,  linestyle='-.', linewidth=lINEWIDTH2, color='deeppink', label='$O^-$')
 plt.plot(t*time_factor, e*density_factor,   linestyle='-.', linewidth=lINEWIDTH2, color='royalblue', label='$e$')
 
 plt.xscale('log')
@@ -61,8 +61,8 @@ plt.xticks(fontsize=12)
 plt.xlabel('t [s]', fontsize=12)
 #plt.xlabel('t [μs]', fontsize=12)
 
-#plt.yscale('log')
-#plt.ylim(((1e11,1e31)))
+plt.yscale('log')
+plt.ylim(((1e11,1e31)))
 plt.yticks(fontsize=12)
 plt.ylabel('n [m$^-$$^3$]', fontsize=12)
 
