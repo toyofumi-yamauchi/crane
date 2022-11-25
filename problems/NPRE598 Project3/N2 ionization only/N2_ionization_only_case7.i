@@ -9,9 +9,9 @@
 #    Right-click the folder, click "New Terminal at Folder".
 # 2. Type "mamba activate moose" to activate moose.
 #    (base) will be changed to (moose).
-# 3. Type "../../crane-opt -i air_plasma.i".
-#    air_plasma_output.csv should be created in the folder.
-# 4. Type "python3 air_plasma_plot.py".
+# 3. Type "../../../crane-opt -i N2_ionization_only_case7.i".
+#    N2_ionization_only_case7_output.csv should be created in the folder.
+# 4. Type "python3 N2_ionization_plasma_plot.py".
 #    Python plot should be generated. 
 
 

@@ -9,9 +9,9 @@
 #    Right-click the folder, click "New Terminal at Folder".
 # 2. Type "mamba activate moose" to activate moose.
 #    (base) will be changed to (moose).
-# 3. Type "../../crane-opt -i air_plasma.i".
-#    air_plasma_output.csv should be created in the folder.
-# 4. Type "python3 air_plasma_plot.py".
+# 3. Type "../../../crane-opt -i O2_only_case2.i".
+#    O2_only_case2.csv should be created in the folder.
+# 4. Type "python3 O2_plasma_plot.py" or "python3 O2_ionization_plot_multiple.py".
 #    Python plot should be generated. 
 
 
@@ -39,13 +39,13 @@
   [N2]
     family = SCALAR
     order = FIRST
-    initial_condition = 1.00e13
+    initial_condition = 0.0
   []
 
   [O2]
     family = SCALAR
     order = FIRST
-    initial_condition = 0.0
+    initial_condition = 1.00e13
   []
 
   [N]
@@ -244,52 +244,76 @@
     file_location = 'data'
 
     equation_constants = 'T_e T_g'
-    equation_values = '174075 300'
+    equation_values = '116050 300'
     equation_variables = 'a'
-    sampling_variable = 'reduced_field'
-    #rate_provider_var = 'reduced_field'
+    sampling_variable = 'T_e_eV'
     
     reactions = '
                  
-		 # 16
-                 #e + O2 -> O + O+ + e + e     : EEDF (Op_ionization)
-     		 
 		 # 7 (R4)
-                 #e + N2 -> N2+ + e + e        : EEDF (N2_ionization)
-		 e + N2 -> e + e + N2+        : {1.00e-10*(1.5*T_e/11605)^(1.90)*exp(-14.6/(1.5*T_e/11605))}
-		 
-		 # 18 (R60)
-     		 #e + O2 -> O- + O             : EEDF (Om_ionization)
-		 #e + O2 -> O- + O             : 2.63e-10*(1.5*T_e/11605)^(-0.495)*exp(-5.65/(1.5*T_e/11605))
+                 #e + N2 -> e + e + N2+        : {1.00e-10*(1.5*T_e/11605)^(1.90)*exp(-14.6/(1.5*T_e/11605))}
+		 # 16
+                 e + O2 -> O + O+ + e + e     : EEDF (Op_ionization_Te)
+     		 # 18 (R60)
+     		 e + O2 -> O- + O             : {2.63e-10*(1.5*T_e/11605)^(-0.495)*exp(-5.65/(1.5*T_e/11605))}
 		 # 19 (R10)
-     		 #e + O2 -> O2+ + e + e        : EEDF (O2p_ionization)
-		 #e + O2 -> O2+ + e + e        : 9.54e-6*(1.5*T_e/11605)^(-1.05)*exp(-55.6/(1.5*T_e/11605))
+     		 e + O2 -> O2+ + e + e        : {9.54e-6*(1.5*T_e/11605)^(-1.05)*exp(-55.6/(1.5*T_e/11605))}
 
-                 # 1
-                 e + N+ + N2 -> N + N2        : {3.12e-23/(T_e^1.5)}
-                 e + N+ + N -> N + N          : {3.12e-23/(T_e^1.5)}
-                 
-                 # 2
-                 e + e + N+ -> N + e          : {1e-19*(T_g/T_e)^4.5}
-                 # 3
-                 e + N -> N+ + e + e          : {1.45e-11*((1.5*T_e/11605)^(2.58))*exp(-8.54/(1.5*T_e/11605))}
-                 # 4
-                 e + N2+ -> N + N             : {2.8e-7*((300/T_e)^0.5)}
-                 # 5
-                 e + N2+ + N2 -> N2 + N2      : {3.12e-23/(T_e^1.5)}
-                 e + N2+ + N -> N2 + N        : {3.12e-23/(T_e^1.5)}
-                 
-		 # 52
-		 N + N2+ -> N+ + N2           : 1e-12 
+                 # 8
+                 e + O+ + O2 -> O + O2        : {3.12e-23/(T_e^1.5)}
+                 e + O+ + O -> O + O          : {3.12e-23/(T_e^1.5)}
+		 # 9
+		 e + e + O+ -> O + e          : {1e-19*(T_g/T_e)^4.5}
+                 # 10
+                 e + O -> O+ + e + e          : {4.75e-9*((1.5*T_e/11605)^(0.61))*exp(-22.1/(1.5*T_e/11605))}
+                 # 11    
+                 e + O + O2 -> O- + O2        : 1e-31
+                 # 12
+		 e + O + O2 -> O + O2-        : 1e-31
+                 # 13
+                 e + O2+ -> O + O             : {2e-7*(300/T_e)}
+                 # 14
+                 e + e + O2+ -> O2 + e        : {1e-19*(T_g/T_e)^4.5}
+                 # 15
+                 e + O2+ + O2 -> O2 + O2      : {3.12e-23/(T_e^1.5)}
+                 e + O2+ + O -> O2 + O        : {3.12e-23/(T_e^1.5)}
+	   	 # 17
+     		 e + O2 -> O + O + e          : {2.03e-8*((1.5*T_e/11605)^(-0.1))*exp(-8.47/(1.5*T_e/11605))}
+		 # 20
+    		 e + O2 + O2 -> O2- + O2      : {1.4e-29*(T_g/T_e)*exp(-600/T_g)*exp(700*(T_e - T_g)/(T_e*T_g))}
+		 # 63
+     		 O + O+ + O2 -> O2+ + O2      : 1e-29
+     		 O + O+ + O -> O2+ + O        : 1e-29
+		 # 64
+		 O+ + O- -> O + O             : {2e-7*(300/T_g)^0.5}
+		 # 69
+		 O+ + O2 -> O2+ + O           : {2.1e-11*(300/T_g)^0.5}
+		 # 70
+		 O+ + O2- -> O2 + O           : {2e-7*(300/T_g)^0.5}
+		 # 78
+		 O + O- -> O2 + e             : 1.4e-10
+		 # 83
+		 O + O2- -> O- + O2           : 3.3e-10
+		 # 93
+	 	 O- + O2+ -> O + O + O        : 1e-7
+		 # 94
+		 O- + O2+ -> O + O2           : {2e-7*(300/T_g)^0.5}
+		 # 142
+	         O2+ + O2- -> O2 + O2         : {2e-7*(300/T_g)^0.5}
+		 # 143
+		 O2+ + O2- -> O2 + O + O      : 1e-7
+		 # 149
+		 O2 + O2- -> O2 + O2 + e      : {2.7e-10*(T_g/300)^0.5*exp(-5590/T_g)}
+
 '
   []
 []
 
 [AuxVariables]
-  [./reduced_field]
+  [./T_e_eV]
     order = FIRST
     family = SCALAR
-    initial_condition = 1.0e-19
+    initial_condition = 10.0
   [../]
   [./a]
     order = FIRST
@@ -298,13 +322,13 @@
 []
 
 [AuxScalarKernels]
-  [reduced_field_calculate]
+  [T_e_eV_calculate]
     type = ParsedAuxScalar
-    variable = reduced_field
-    constant_names = 'V d qe R current'
-    constant_expressions = '1000 0.004 1.602e-19 1e5 100'
-    args = 'reduced_field N2'
-    function = 'V/(d+R*current/(reduced_field*N2*1e6))/(N2*1e6)'
+    variable = T_e_eV
+    constant_names = 'x'
+    constant_expressions = '10.0'
+    args = 'a'
+    function = 'x'
     execute_on = 'TIMESTEP_END'
   []
 []

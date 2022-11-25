@@ -9,9 +9,9 @@
 #    Right-click the folder, click "New Terminal at Folder".
 # 2. Type "mamba activate moose" to activate moose.
 #    (base) will be changed to (moose).
-# 3. Type "../../../crane-opt -i air_plasma.i".
-#    air_plasma_output.csv should be created in the folder.
-# 4. Type "python3 air_plasma_plot.py".
+# 3. Type "../../../crane-opt -i air_plasma_case4.i".
+#    air_plasma_case4_output.csv should be created in the folder.
+# 4. Type "python3 air_plasma_plot.py" or "python3 air_plasma_plot_multiple.py"
 #    Python plot should be generated. 
 
 
@@ -39,13 +39,13 @@
   [N2]
     family = SCALAR
     order = FIRST
-    initial_condition = 5.00e12
+    initial_condition = 2.50e12
   []
 
   [O2]
     family = SCALAR
     order = FIRST
-    initial_condition = 5.00e12
+    initial_condition = 7.50e12
   []
 
   [N]
